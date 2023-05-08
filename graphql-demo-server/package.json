@@ -4,12 +4,15 @@
   "description": "",
   "main": "./dist/index.js",
   "scripts": {
-    "test": "mocha",
-		"compile": "npm run codegen && tsc --declaration",
-		"compile:watch": "npm run codegen && tsc --declaration --watch",
 		"codegen": "graphql-codegen --config codegen.ts",
-		"start": "npm run compile && node ./dist/src/index.js",
-		"start:watch": "nodemon ./dist/src/index.js"
+    "codegen:watch": "graphql-codegen --watch --config codegen.ts",
+    "compile": "tsc --declaration",
+		"compile:full": "npm run codegen && npm run compile",
+    "compile:watch": "tsc --declaration --watch",
+    "start": "npm run compile && node ./dist/src/index.js",
+    "start:watch": "nodemon ./dist/src/index.js",
+    "test": "mocha",
+		"watch-all": "concurrently \"npm:codegen:watch\" \"npm:compile:watch\" \"npm:start:watch\" "
   },
   "keywords": [],
   "author": "John Paxton <pax@speedingplanet.com>",
@@ -31,6 +34,7 @@
     "@types/mocha": "^10.0.1",
     "@types/node": "^18.15.13",
     "chai": "^4.3.7",
+    "concurrently": "^8.0.1",
     "mocha": "^10.2.0",
     "nodemon": "^2.0.22",
     "prettier": "^2.8.7",
