@@ -1,0 +1,50 @@
+type Query {
+	hello(name: String): String!
+	students: [Student]
+	studentsWithFilter(filter: StudentFilter!): [Student]!
+	studentsWithFields(id: Int, 	firstName: String, lastName: String, dateOfBirth: String, email: String, phoneNumber: String, city: String, province: String, country: String, postalCode: String): [Student]!
+	studentById(id: Int!): Student
+}
+
+type Mutation {
+	addStudent(student: StudentInput!): Student
+	updateStudent(id: Int!, student: StudentInput!): Student
+	deleteStudent(id: Int!): Boolean
+}
+
+type Student {
+	id: Int!
+	firstName: String!
+	lastName: String!
+	dateOfBirth: String!
+	email: String
+	phoneNumber: String
+	city: String
+	province: String
+	country: String
+	postalCode: String
+}
+
+input StudentFilter {
+	firstName: String
+	lastName: String
+	dateOfBirth: String
+	email: String
+	phoneNumber: String
+	city: String
+	province: String
+	country: String
+	postalCode: String
+}
+
+input StudentInput {
+	firstName: String!
+	lastName: String!
+	dateOfBirth: String!
+	email: String
+	phoneNumber: String
+	city: String
+	province: String
+	country: String
+	postalCode: String
+}

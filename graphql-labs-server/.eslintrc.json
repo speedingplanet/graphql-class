@@ -1,0 +1,8 @@
+{
+	"extends": ["@speedingplanet/eslint-config-typescript"],
+	"rules": {
+		"@typescript-eslint/object-curly-spacing": "warn",
+		"padded-blocks": "warn",
+		"no-trailing-spaces": "warn"
+	}
+}
