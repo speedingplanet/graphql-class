@@ -4,7 +4,8 @@ import { strict as assert } from 'node:assert';
 import { ApolloServer } from '@apollo/server';
 import { resolvers } from '../resolvers.js';
 import { typeDefs } from '../typeDefs.js';
-import { type Student, students as originalStudents } from '../data/all-data-typed.js';
+import { students as originalStudents } from '../data/all-data-typed.js';
+import { type Student } from '../generated/graphql.js';
 
 describe('Apollo Server students test suite', () => {
 	let testServer: ApolloServer<any>;

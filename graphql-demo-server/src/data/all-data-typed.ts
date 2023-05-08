@@ -1,15 +1,4 @@
-export interface Student {
-	firstName: string;
-	lastName: string;
-	dateOfBirth: string;
-	email: string;
-	phoneNumber: string;
-	city: string;
-	province: string | null;
-	country: string;
-	postalCode: string;
-	id: number;
-}
+import { type Student } from '../generated/graphql.js';
 
 export const students: Student[] = [
 	{
