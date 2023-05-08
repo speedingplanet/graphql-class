@@ -1,8 +1,12 @@
 type Query {
-	hello(name: String): String!
+	# hello(name: String): String!
+	# GraphQL expects a "resolver" to provide data for this query
+	# hello: String
+	# hello(firstName: String): String
+	hello(firstName: String): String
 	students: [Student]
 	studentsWithFilter(filter: StudentFilter!): [Student]!
-	studentsWithFields(id: Int, 	firstName: String, lastName: String, dateOfBirth: String, email: String, phoneNumber: String, city: String, province: String, country: String, postalCode: String): [Student]!
+	studentsWithFields(id: Int, firstName: String, lastName: String, dateOfBirth: String, email: String, phoneNumber: String, city: String, province: String, country: String, postalCode: String): [Student]!
 	studentById(id: Int!): Student
 }
 

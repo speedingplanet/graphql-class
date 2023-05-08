@@ -39,7 +39,7 @@ export type MutationUpdateStudentArgs = {
 
 export type Query = {
   __typename?: 'Query';
-  hello: Scalars['String'];
+  hello?: Maybe<Scalars['String']>;
   studentById?: Maybe<Student>;
   students?: Maybe<Array<Maybe<Student>>>;
   studentsWithFields: Array<Maybe<Student>>;
@@ -48,7 +48,7 @@ export type Query = {
 
 
 export type QueryHelloArgs = {
-  name?: InputMaybe<Scalars['String']>;
+  firstName?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -213,7 +213,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  hello?: Resolver<ResolversTypes['String'], ParentType, ContextType, Partial<QueryHelloArgs>>;
+  hello?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<QueryHelloArgs>>;
   studentById?: Resolver<Maybe<ResolversTypes['Student']>, ParentType, ContextType, RequireFields<QueryStudentByIdArgs, 'id'>>;
   students?: Resolver<Maybe<Array<Maybe<ResolversTypes['Student']>>>, ParentType, ContextType>;
   studentsWithFields?: Resolver<Array<Maybe<ResolversTypes['Student']>>, ParentType, ContextType, Partial<QueryStudentsWithFieldsArgs>>;

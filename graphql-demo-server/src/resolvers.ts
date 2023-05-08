@@ -1,11 +1,20 @@
-import type { Resolvers } from './generated/graphql.js';
-import { type Student, students } from './data/all-data-typed.js';
+import type { Resolvers, Student } from './generated/graphql.js';
+import { students } from './data/all-data-typed.js';
 import _ from 'lodash';
 import { GraphQLError } from 'graphql';
 
 export const resolvers: Resolvers = {
 	Query: {
-		hello: (parent, { name }: { name: string }) => `Hello ${name ?? 'everyone'}!`,
+		// hello: (parent, { name }: { name: string }) => `Hello ${name ?? 'everyone'}!`,
+
+		// All of these are equivalent (assignment, declaration, arrow)
+		// hello: function () { return 'Hi!'; },
+		// hello() { return 'Hi!'; },
+		// hello: () => 'Hi!',
+		hello: (parent, args) => {
+			let firstName = args.firstName;
+			return `Hi ${firstName}!`;
+		},
 		students() {
 			return students;
 		},
