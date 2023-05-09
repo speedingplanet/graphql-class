@@ -1,0 +1,44 @@
+type Movie {
+	id: Int!
+	title: String!
+	year: Int!
+	rating: Int!
+	directors: [Person!]
+	writers: [Person!]
+	genres: [String!]!
+	actors: [Person!]
+}
+
+type Person {
+	id: Int!
+	firstName: String!
+	middleName: String
+	lastName: String!
+	movies: [Movie]
+}
+
+input MovieFilterInput {
+	id: Int
+	title: String
+	year: Int
+	rating: Int
+	genre: String	
+}
+
+input MovieInput {
+	id: Int
+	title: String!
+	year: Int!
+	rating: Int!
+	genres: [String!]!
+}
+
+type Query {
+	hello(name: String): String!
+	movies(filter: MovieFilterInput): [Movie!]! 
+	actors: [Person!]! 
+}
+
+type Mutation {
+	updateMovie(id: Int!, movie: MovieInput!): Movie!
+}
