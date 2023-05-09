@@ -9,6 +9,7 @@
     "compile": "tsc --declaration",
 		"compile:full": "npm run codegen && npm run compile",
     "compile:watch": "tsc --declaration --watch",
+		"setup": "node setup.js",
     "start": "npm run compile && node ./dist/src/index.js",
     "start:watch": "nodemon ./dist/src/index.js",
     "test": "mocha",
