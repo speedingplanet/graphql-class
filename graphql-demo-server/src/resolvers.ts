@@ -11,8 +11,16 @@ export const resolvers: Resolvers = {
 		// hello: function () { return 'Hi!'; },
 		// hello() { return 'Hi!'; },
 		// hello: () => 'Hi!',
-		hello: (parent, args) => {
-			let firstName = args.firstName;
+		hello(parent, args) {
+			// if args.firstName is null or undefined, use 'everyone' instead.
+			/*
+			if (args.firstName === null || args.firstName === undefined) {
+				return 'everyone'
+			} else {
+				return args.firstName
+			}
+			*/
+			let firstName = args.firstName ?? 'everyone';
 			return `Hi ${firstName}!`;
 		},
 		students() {
@@ -27,7 +35,7 @@ export const resolvers: Resolvers = {
 			filteredStudents = _.filter(students, args.filter) as Student[];
 			return filteredStudents;
 		},
-		studentsWithFields(parent, args) {
+		studentsWithFields(parent, args) { // studentsWithFields(province: 'CA', country: 'US')
 			// Shortcut, no need to do filtering work if args is not present or empty
 			if (!args || _.isEmpty(args)) return students;
 			let passedArgs = { filter: { ...args } };
