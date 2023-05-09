@@ -25,6 +25,8 @@ type Query {
 	# [Movie!]  -> null/undefined, array with one or more movies
 	# [Movie!]! -> array with one or more movies 
 	moviesByGenre(genre: String!): [Movie]!
+
+	actors: [Actor]
 }
 
 type Mutation {
@@ -38,10 +40,20 @@ input MovieInput {
 	genres: [String]!
 }
 
+type Actor {
+	id: Int!
+	firstName: String!
+	middleName: String
+	lastName: String!
+	movies: [Movie]
+}
+
 type Movie {
 	title: String
 	id: Int!
 	year: Int
 	rating: Int
-	genres: [String] 
+	genres: [String]
+	actors: [Actor]
+	isAwesome: Boolean
 }
