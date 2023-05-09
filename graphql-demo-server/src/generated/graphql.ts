@@ -34,7 +34,7 @@ export type MutationDeleteStudentArgs = {
 
 export type MutationUpdateStudentArgs = {
   id: Scalars['Int'];
-  student: StudentInput;
+  student: StudentOptional;
 };
 
 export type Query = {
@@ -72,7 +72,7 @@ export type QueryStudentsWithFieldsArgs = {
 
 
 export type QueryStudentsWithFilterArgs = {
-  filter: StudentFilter;
+  filter: StudentOptional;
 };
 
 export type Student = {
@@ -89,18 +89,6 @@ export type Student = {
   province?: Maybe<Scalars['String']>;
 };
 
-export type StudentFilter = {
-  city?: InputMaybe<Scalars['String']>;
-  country?: InputMaybe<Scalars['String']>;
-  dateOfBirth?: InputMaybe<Scalars['String']>;
-  email?: InputMaybe<Scalars['String']>;
-  firstName?: InputMaybe<Scalars['String']>;
-  lastName?: InputMaybe<Scalars['String']>;
-  phoneNumber?: InputMaybe<Scalars['String']>;
-  postalCode?: InputMaybe<Scalars['String']>;
-  province?: InputMaybe<Scalars['String']>;
-};
-
 export type StudentInput = {
   city?: InputMaybe<Scalars['String']>;
   country?: InputMaybe<Scalars['String']>;
@@ -108,6 +96,18 @@ export type StudentInput = {
   email?: InputMaybe<Scalars['String']>;
   firstName: Scalars['String'];
   lastName: Scalars['String'];
+  phoneNumber?: InputMaybe<Scalars['String']>;
+  postalCode?: InputMaybe<Scalars['String']>;
+  province?: InputMaybe<Scalars['String']>;
+};
+
+export type StudentOptional = {
+  city?: InputMaybe<Scalars['String']>;
+  country?: InputMaybe<Scalars['String']>;
+  dateOfBirth?: InputMaybe<Scalars['String']>;
+  email?: InputMaybe<Scalars['String']>;
+  firstName?: InputMaybe<Scalars['String']>;
+  lastName?: InputMaybe<Scalars['String']>;
   phoneNumber?: InputMaybe<Scalars['String']>;
   postalCode?: InputMaybe<Scalars['String']>;
   province?: InputMaybe<Scalars['String']>;
@@ -190,8 +190,8 @@ export type ResolversTypes = {
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
   Student: ResolverTypeWrapper<Student>;
-  StudentFilter: StudentFilter;
   StudentInput: StudentInput;
+  StudentOptional: StudentOptional;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -202,8 +202,8 @@ export type ResolversParentTypes = {
   Query: {};
   String: Scalars['String'];
   Student: Student;
-  StudentFilter: StudentFilter;
   StudentInput: StudentInput;
+  StudentOptional: StudentOptional;
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {

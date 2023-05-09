@@ -63,15 +63,14 @@ export const resolvers: Resolvers = {
 		updateStudent(parent, args) {
 			let id = args.id;
 
-			let foundStudent = students.find(m => m.id === id);
-			if (foundStudent === null || typeof foundStudent !== 'object') {
+			let foundStudent = students.find(s => s.id === id);
+			if (foundStudent === undefined) {
 				throw new GraphQLError(`Invalid argument value (id ${id} not found`, {
 					extensions: { code: 'BAD_USER_INPUT' },
 				});
-			} else {
-				Object.assign(foundStudent, args.student);
 			}
 
+			Object.assign(foundStudent, args.student);
 			return foundStudent;
 		},
 

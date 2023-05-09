@@ -5,7 +5,7 @@ type Query {
 	# hello(firstName: String): String
 	hello(firstName: String): String
 	students: [Student]
-	studentsWithFilter(filter: StudentFilter!): [Student]!
+	studentsWithFilter(filter: StudentOptional!): [Student]!
 	studentsWithFields(id: Int, firstName: String, lastName: String, dateOfBirth: String, email: String, phoneNumber: String, city: String, province: String, country: String, postalCode: String): [Student]!
 	studentById(id: Int!): Student
 }
@@ -18,7 +18,9 @@ type Mutation {
 	# addStudent(student: StudentInput!): Int
 	#
 	# addStudent(student: StudentInput!): Boolean
-	updateStudent(id: Int!, student: StudentInput!): Student
+
+	# Thinking of a SQL UPDATE statement: UPDATE {StudentInput} WHERE id = id;
+	updateStudent(id: Int!, student: StudentOptional!): Student
 	deleteStudent(id: Int!): Boolean
 }
 
@@ -35,7 +37,7 @@ type Student {
 	postalCode: String
 }
 
-input StudentFilter {
+input StudentOptional {
 	firstName: String
 	lastName: String
 	dateOfBirth: String
