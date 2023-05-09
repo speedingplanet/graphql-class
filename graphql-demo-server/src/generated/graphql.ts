@@ -16,7 +16,7 @@ export type Scalars = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  addStudent?: Maybe<Student>;
+  addStudent: Student;
   deleteStudent?: Maybe<Scalars['Boolean']>;
   updateStudent?: Maybe<Student>;
 };
@@ -207,7 +207,7 @@ export type ResolversParentTypes = {
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  addStudent?: Resolver<Maybe<ResolversTypes['Student']>, ParentType, ContextType, RequireFields<MutationAddStudentArgs, 'student'>>;
+  addStudent?: Resolver<ResolversTypes['Student'], ParentType, ContextType, RequireFields<MutationAddStudentArgs, 'student'>>;
   deleteStudent?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationDeleteStudentArgs, 'id'>>;
   updateStudent?: Resolver<Maybe<ResolversTypes['Student']>, ParentType, ContextType, RequireFields<MutationUpdateStudentArgs, 'id' | 'student'>>;
 };

@@ -55,9 +55,13 @@
               }
             ],
             "type": {
-              "kind": "OBJECT",
-              "name": "Student",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Student",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null

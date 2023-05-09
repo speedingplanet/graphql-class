@@ -11,7 +11,13 @@ type Query {
 }
 
 type Mutation {
-	addStudent(student: StudentInput!): Student
+	# This is the best option, because it returns the fully created Student object
+	addStudent(student: StudentInput!): Student!
+	#
+	# Just return the new ID value
+	# addStudent(student: StudentInput!): Int
+	#
+	# addStudent(student: StudentInput!): Boolean
 	updateStudent(id: Int!, student: StudentInput!): Student
 	deleteStudent(id: Int!): Boolean
 }

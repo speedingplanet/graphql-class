@@ -50,14 +50,12 @@ export const resolvers: Resolvers = {
 	Mutation: {
 		addStudent(parent, args) {
 			let id = getNextId(students, 'id');
-			let newStudent = {
+			let newStudent: Student = {
 				...args.student,
 				id,
 			};
 
-			// TODO: Some complexity with province: null on the TS side and
-			// and optional province on the GraphQL side
-			students.push(newStudent as Student);
+			students.push(newStudent);
 
 			return newStudent;
 		},
