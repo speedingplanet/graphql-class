@@ -1,10 +1,10 @@
-import { FullFormControlled, type MovieWithoutId } from '../FullForm';
+import { FullFormControlled } from '../FullForm';
 import { gql, useMutation } from '@apollo/client';
 import { SelectableMovieDetails } from '../SelectableMovieDetails';
-import { type Movie } from '../../generated/graphql';
+import { type MovieInput, type Movie } from '../../generated/graphql';
 
 let ADD_MOVIE = gql`
-	mutation AddMovie($movie: NewMovie!) {
+	mutation AddMovie($movie: MovieInput!) {
 		addMovie(movie: $movie) {
 			id
 			title
@@ -13,9 +13,12 @@ let ADD_MOVIE = gql`
 `;
 
 export default function AddingMoviesWithGraphQL() {
-	const [addMovie, { data }] = useMutation(ADD_MOVIE);
+	// const [addMovie, { data }] = useMutation(ADD_MOVIE);
+	const mutationTuple = useMutation<{ addMovie: Movie }>(ADD_MOVIE);
+	const addMovie = mutationTuple[0];
+	const mutationStatus = mutationTuple[1];
 
-	let handleSubmitAction = async (movie: MovieWithoutId) => {
+	let handleSubmitAction = async (movie: MovieInput) => {
 		console.log('adding movie:', movie);
 		await addMovie({ variables: { movie } });
 	};
@@ -29,7 +32,7 @@ export default function AddingMoviesWithGraphQL() {
 					formLabel="Adding a movie"
 				/>
 			</div>
-			<div className="col"><MovieDetailsWrapper movie={data?.addMovie} /></div>
+			<div className="col"><MovieDetailsWrapper movie={mutationStatus.data?.addMovie} /></div>
 		</section>
 	);
 }

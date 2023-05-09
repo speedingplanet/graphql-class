@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { type Movie } from '../generated/graphql';
+import { type MovieInput, type Movie } from '../generated/graphql';
 
 export default function FullForm() {
 	return (
@@ -103,9 +103,8 @@ export function FullFormUncontrolled() {
 	);
 }
 
-export type MovieWithoutId = Partial<Omit<Movie, 'id'>>;
 interface FullFormControlledProps {
-	submitAction?: (movie: MovieWithoutId) => void;
+	submitAction?: (movie: MovieInput) => void;
 	submitButtonLabel?: string;
 	formLabel?: string;
 	movieToEdit?: Movie;
@@ -117,7 +116,7 @@ export function FullFormControlled({
 	formLabel,
 	movieToEdit,
 }: FullFormControlledProps) {
-	let [movie, setMovie] = useState<MovieWithoutId>({});
+	let [movie, setMovie] = useState<Partial<MovieInput>>({});
 
 	let updateMovie: React.FormEventHandler<HTMLInputElement> = (event) => {
 		let field = event.currentTarget.name;
@@ -141,7 +140,18 @@ export function FullFormControlled({
 
 	let handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
 		event.preventDefault();
-		if (submitAction) submitAction(movie);
+		if (submitAction) {
+			if (movie.title) {
+				let actualMovie: MovieInput = {
+					title: movie.title,
+					genres: movie.genres ?? [],
+					year: movie.year,
+					rating: movie.rating,
+				};
+
+				submitAction(actualMovie);
+			}
+		}
 	};
 
 	return (
@@ -264,7 +274,7 @@ export function FullFormControlled({
 	);
 }
 
-function getGenres(movie: MovieWithoutId, movieToEdit?: Movie) {
+function getGenres(movie: Partial<MovieInput>, movieToEdit?: Movie) {
 	if (movie.genres && movie.genres !== null) return movie.genres;
 	if (movieToEdit?.genres && movieToEdit.genres !== null) return movieToEdit.genres;
 
