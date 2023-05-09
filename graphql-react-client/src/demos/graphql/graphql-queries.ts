@@ -10,8 +10,8 @@ export const GET_MOVIE_TITLES = gql`
 `;
 
 export const QUERY_MOVIES_BY_GENRE = gql`
-	query QueryMoviesByGenre($filter: MovieFilterInput) {
-		movies(filter: $filter) {
+	query QueryMoviesByGenre($genre: String!) {
+		moviesByGenre(genre: $genre) {
 			id
 			title
 			genres

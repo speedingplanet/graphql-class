@@ -15,22 +15,28 @@ export default function ApolloGraphql() {
 export function RenderGraphql() {
 	let [userGenre, setUserGenre] = useState('');
 
+	let queryRecord = useLazyQuery<{ moviesByGenre: Movie[] }>(QUERY_MOVIES_BY_GENRE);
+	let runQuery = queryRecord[0];
+	let queryStatus = queryRecord[1];
+
+	/*
 	let [loadQuery,
 		{
 			called, loading, data,
 		}] = useLazyQuery<{ movies: Movie[] }>(
 		QUERY_MOVIES_BY_GENRE
 	);
+	*/
 
 	let handleSearchClick = async () => {
 		if (userGenre) {
-			await loadQuery({ variables: { filter: { genre: userGenre } } });
+			await runQuery({ variables: { genre: userGenre } });
 		} else {
-			await loadQuery();
+			await runQuery();
 		}
 	};
 
-	if (loading) return <p>Loading...</p>;
+	if (queryStatus.loading) return <p>Loading...</p>;
 
 	return (
 		<section className="row">
@@ -59,11 +65,11 @@ export function RenderGraphql() {
 				</div>
 			</div>
 			<div className="col">
-				{data?.movies
+				{queryStatus.data?.moviesByGenre
 					? (
-						<RenderMovieList movies={data.movies} />
+						<RenderMovieList movies={queryStatus.data.moviesByGenre} />
 					)
-					: called && loading
+					: queryStatus.called && queryStatus.loading
 						? (
 							<p>Loading...</p>
 						)
