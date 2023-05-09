@@ -25,7 +25,17 @@ type Query {
 	# [Movie!]  -> null/undefined, array with one or more movies
 	# [Movie!]! -> array with one or more movies 
 	moviesByGenre(genre: String!): [Movie]!
+}
 
+type Mutation {
+	addMovie(movie: MovieInput!): Movie!
+}
+
+input MovieInput {
+	title: String!
+	year: Int
+	rating: Int
+	genres: [String]!
 }
 
 type Movie {

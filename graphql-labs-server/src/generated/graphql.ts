@@ -23,6 +23,23 @@ export type Movie = {
   year?: Maybe<Scalars['Int']>;
 };
 
+export type MovieInput = {
+  genres: Array<InputMaybe<Scalars['String']>>;
+  rating?: InputMaybe<Scalars['Int']>;
+  title: Scalars['String'];
+  year?: InputMaybe<Scalars['Int']>;
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  addMovie: Movie;
+};
+
+
+export type MutationAddMovieArgs = {
+  movie: MovieInput;
+};
+
 export type Query = {
   __typename?: 'Query';
   helloWorld?: Maybe<Scalars['String']>;
@@ -114,6 +131,8 @@ export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   Movie: ResolverTypeWrapper<Movie>;
+  MovieInput: MovieInput;
+  Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
 };
@@ -123,6 +142,8 @@ export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
   Int: Scalars['Int'];
   Movie: Movie;
+  MovieInput: MovieInput;
+  Mutation: {};
   Query: {};
   String: Scalars['String'];
 };
@@ -136,6 +157,10 @@ export type MovieResolvers<ContextType = any, ParentType extends ResolversParent
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  addMovie?: Resolver<ResolversTypes['Movie'], ParentType, ContextType, RequireFields<MutationAddMovieArgs, 'movie'>>;
+};
+
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   helloWorld?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<QueryHelloWorldArgs>>;
   movies?: Resolver<Maybe<Array<Maybe<ResolversTypes['Movie']>>>, ParentType, ContextType>;
@@ -144,6 +169,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
 
 export type Resolvers<ContextType = any> = {
   Movie?: MovieResolvers<ContextType>;
+  Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
 };
 

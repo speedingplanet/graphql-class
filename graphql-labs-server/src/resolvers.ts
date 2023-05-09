@@ -1,5 +1,6 @@
+import { GraphQLError } from 'graphql';
 import { movies } from './data/all-data-typed.js';
-import { type Resolvers } from './generated/graphql.js';
+import { type Movie, type Resolvers } from './generated/graphql.js';
 
 let resolvers: Resolvers = {
 	Query: {
@@ -25,6 +26,36 @@ let resolvers: Resolvers = {
 			return movies.filter(movie => movie.genres?.includes(genre));
 		},
 	},
+	Mutation: {
+		addMovie(parent, args) {
+			let nextId = getNextId(movies, 'id');
+			let newMovie: Movie = {
+				...args.movie,
+				id: nextId,
+			};
+
+			let duplicateTitle = movies.find(movie => movie.title === newMovie.title);
+			if (duplicateTitle) {
+				// eslint-disable-next-line max-len
+				throw new GraphQLError(
+					`Movie "${newMovie.title}" already exists in the database!`,
+					{
+						extensions: {
+							code: 'BAD_USER_INPUT',
+						},
+					}
+				);
+			}
+
+			movies.push(newMovie);
+			return newMovie;
+		},
+	},
 };
+
+function getNextId<T>(records: T[], field: keyof T) {
+	let values = records.map(r => r[field]) as number[];
+	return Math.max(...values) + 1;
+}
 
 export { resolvers };
