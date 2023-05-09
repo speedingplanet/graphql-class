@@ -9,6 +9,23 @@
 type Query {
 	helloWorld(name: String): String
 	movies: [Movie]
+	# 1) override movies
+	# movies(genre: String)
+	#
+	# 2) more general movies query
+	# movies(criteria: MovieFilter) (pass in something like {genre: 'fantasy', director: 'Peter Jackson'})
+	#
+	# 3) Specific query implementation
+	# moviesByGenre(genre: String!) (required argument)
+	# moviesByTitle(title: String!) (required argument)
+
+	# Return values
+	# [Movie]   -> null/undefined, empty array, array with one or more movies 
+	# [Movie]!  -> empty array, array with one or more movies 
+	# [Movie!]  -> null/undefined, array with one or more movies
+	# [Movie!]! -> array with one or more movies 
+	moviesByGenre(genre: String!): [Movie]!
+
 }
 
 type Movie {
@@ -16,5 +33,5 @@ type Movie {
 	id: Int!
 	year: Int
 	rating: Int
-	genres: [String]
+	genres: [String] 
 }

@@ -12,6 +12,18 @@ let resolvers: Resolvers = {
 		movies() {
 			return movies;
 		},
+
+		moviesByGenre(parent, { genre }) {
+			/*
+				// The line below is a short version of this
+				let foundMovies = movies.filter(movie => {
+					return movie.genres.includes(genre);
+				});
+
+				return foundMovies;
+			*/
+			return movies.filter(movie => movie.genres?.includes(genre));
+		},
 	},
 };
 
