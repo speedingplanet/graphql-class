@@ -1,4 +1,6 @@
-export const movies = [
+import { type Movie } from '../generated/graphql.js';
+
+export const movies: Movie[] = [
 	{
 		id: 1,
 		title: 'Raiders of the Lost Ark',

@@ -1,1 +1,20 @@
-# Placeholder, can delete
+# Add a type for Movie
+# Look at data/all-data-typed to see how you would define a Movie
+#
+# Add a query for movies
+# It should not take arguments, but it should return an array of Movies
+# Then implement a resolver in resolvers.ts for movies
+# Nothing fancy, just return the array of movies from all-data-typed
+
+type Query {
+	helloWorld(name: String): String
+	movies: [Movie]
+}
+
+type Movie {
+	title: String
+	id: Int!
+	year: Int
+	rating: Int
+	genres: [String]
+}
