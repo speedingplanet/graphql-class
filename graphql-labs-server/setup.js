@@ -12,7 +12,7 @@ if (!labNumber) {
 if (labNumber.length === 1) labNumber = '0' + labNumber;
 
 let labFolder = `lab-${labNumber}`;
-let labPath = path.resolve('./labs', 'starters', labFolder);
+let labPath = path.resolve('../labs', 'starters', labFolder);
 let mainPath = path.resolve('./');
 
 fs.copySync(labPath, mainPath);
