@@ -1,0 +1,6 @@
+{
+	"extends": ["@speedingplanet/eslint-config-typescript"],
+	"rules": {
+		"prefer-const": "off"
+	}
+}
